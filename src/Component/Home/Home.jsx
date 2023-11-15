@@ -40,6 +40,10 @@ const Home = () => {
   const deletedMails = useSelector((state) => state.mail.deletedMails);
   const [temp, setTemp] = useState([]);
   useEffect(()=>{
+    console.log('allMails:', allMails);
+    console.log('sentMails:', sentMails);
+    console.log('unreadMails:', unreadMails);
+    console.log('deletedMails:', deletedMails);
     setTemp(allMails);
   },[allMails]);
   const navigate=useNavigate();
@@ -111,7 +115,7 @@ const Home = () => {
     }
       if(value.sender!==localStorage.getItem("email"))
       { setShowModal(true);
-        fetch(`https://mailclientbox-c312c-default-rtdb.firebaseio.com//mail/${value.mailId}.json`,{
+        fetch(`https://mail-box-31356-default-rtdb.firebaseio.com//mail/${value.mailId}.json`,{
         method:"PUT",
         header:{
           'Content-Type':"application/json"
@@ -126,7 +130,7 @@ const Home = () => {
         return response.json();
       })
       .then((data)=>{
-        console.log(data);
+        console.log("sucess");
       })
       .catch(error=>{
         console.log(error);
@@ -141,7 +145,7 @@ const Home = () => {
   }
   const deleteHandler=(value)=>{
     setShowModal(true);
-  fetch(`https://mailclientbox-c312c-default-rtdb.firebaseio.com//mail/${value.mailId}.json`,{
+  fetch(`https://mail-box-31356-default-rtdb.firebaseio.com//mail/${value.mailId}.json`,{
     method:"DELETE",
   }).then((response)=>{
     if(!response)
@@ -172,7 +176,7 @@ const Home = () => {
               >
                <HiOutlineMenuAlt1 fontSize={"2rem"}/>
               </div>{" "}
-              <h1> Yahoo!!</h1>{" "}
+              <h1> MailBox!!</h1>{" "}
             </div>{" "}
           </div>
           <div class="search-cantrol w-100 ms-5 ms-5">
